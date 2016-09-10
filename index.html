@@ -9,27 +9,31 @@
     		<a href="javascript:void(0);" onclick="myFunction()">&#9776;</a>
   		</li>
 	</ul>
-    <style>
-      body {
-      background-color: powderblue;
-      max-width: 1000px;
-      margin:0px auto;
+    <script>
+      /* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */
+      function myFunction() {
+      var x = document.getElementById("myTopnav");
+      if (x.className === "topnav") {
+      x.className += " responsive";
+      } else {
+      x.className = "topnav";
       }
-    </style>
+      }
+    </script>
     <!--__________________________________________________________________________________________-->
     
     
 	<body>
     <h1>W.O.W. Projects</h1>
-    <p1>A portfolio of projects completed by William Whitehead.</p1>
+    <p>A portfolio of projects completed by William Whitehead.</p>
     <h2>About Me</h2>
-    <p2>
-      I started building things in my home in Davis, CA.  Early projects starting in primary school were wood and glue contraptions, but I quickly expanded my materials and methods as a reached for new goals.  My earliest substantial project was a RC sailing boat, which introduced me to the possibilities of electronics.  Many more projects followed.
+    <p1>
+      I started building things at my home in Davis, CA.  My earliest projects, starting in primary school, were wood and glue contraptions, but I quickly expanded my materials and methods as a reached for new goals.  My earliest substantial project was a RC sailing boat, which introduced me to the possibilities of electronics.  Many more projects followed.
       <br>
       <br>
-        My projects have been fueled by substantial access to tools at home, and by ideas and suggestions from my father, who also loves to design and build things.  From my father I have access to a small selection of machine tools, I have built up a collection of my own equipment for building the circuits needed for my projects.
+        My projects have been fueled by substantial access to tools at home, and by ideas and suggestions from my father, who also loves to design and build things.  From my father I have access to a small selection of machine tools, and I have built up a collection of my own equipment for building the circuits I want for my projects.
         <br>
-    </p2>
+    </p1>
     <style>
       img {
       max-width: 200px;
@@ -38,6 +42,6 @@
     </style>
     <img src="images/me.jpg">
     <h2>Contact</h2>
-    <p3>Email wow@dcn.org</p3>
+    <p1>Email wow@dcn.org</p1>
 	</body>
 </html>
