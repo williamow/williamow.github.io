@@ -2,12 +2,14 @@
 <html>
   <link rel="stylesheet" type="text/css" href="css styles/topnav.css">
     <ul class="topnav" id="myTopnav">
-
       <li>
         <a href="index.html">Home</a>
       </li>
       <li>
         <a href="sampler.html">Water Sampler</a>
+      </li>
+      <li>
+        <a href="esc.html">Speed Controller</a>
       </li>
       <li class="icon">
         <a href="javascript:void(0);" onclick="myFunction()">&#9776;</a>
@@ -24,7 +26,7 @@
       }
       }
     </script>
-<!--__________________________________________________________________________________________-->
+    <!--__________________________________________________________________________________________-->
     
     
 
@@ -40,7 +42,7 @@
     </p1>
     <h2>Design</h2>
     <p1>
-      The catamaran structure is constructed of aluminum extruded angle.  All mechanisms and components are mounted between two raised rails about 6 inches above the water, and two pool noodles are secured to the base of the catamaran for floatation.  The overall dimensions of the catamaran are 4x2x1 feet.<br></p1>
+      The catamaran structure is constructed of aluminum extruded angle.  All mechanisms and components are mounted between two raised rails about 6 inches above the water, and two pool noodles are secured to the base of the catamaran for floatation.  The overall dimensions of the catamaran are 4x2x1 feet.</p1>
     <h3>Propulsion</h3>
     <p1>
       The sampler uses a standard 18-pound (stationary thrust) trolling motor for thrust, which is vectored using a high-torque standard servo motor.  The trolling motor is held by a quick-release shaft collar that allows the trolling motor to be held at different heights, down for use and up so the sampler can be laid flat on the ground when not in use.</p1>
@@ -49,27 +51,24 @@
       The heart of the sampler is a spooled length of Tygon tubing. The spool is turned to lower the length of Tygon tubing to the sample depth and to bring the tube up again when it is time to return to the shore of the river. A dry-priming pump pulls water through the deployed tube, through a rotary joint and pushes it into a two-liter bottle that can be retrieved from the sampler.</p1>
     <h3>Electronics</h3>
     <p1>
-      Power is provided by one 5AH, 12V sealed lead-acid battery that easily gives hour long runtimes at full throttle. Remote control is achieved through a standard hobby aircraft controller that includes a controller and a receiver.  The receiver has six servo PWM signal outputs, four of which are used on the sampler.  Three of the outputs send signal to electronic speed controllers I  built myself. First revision speed controllers worked, but proved to be too sensitive to shorting and failure.  However, a better designed and protected fourth revision speed controller now reliably controls the sampler’s motors. One controller is even programmed to handle the feedback for Tygon tubing deployment, so there is no need for any central processing.<br></p1>
-
-      <div class="img35">
-        <figure>
-          <img src="images/esc.jpg">
-          <figcaption>Completed final version speed controller</figcaption>
-        </figure>
-      </div>
-      <div class="img60">
-        <figure>
-          <img src="images/esc_schematic.png">
-          <figcaption>Speed controller schematic</figcaption>
-        </figure>
-      </div>
+      Power is provided by one 5AH, 12V sealed lead-acid battery that easily gives hour long runtimes at full throttle. Remote control is achieved through a standard hobby aircraft controller that includes a controller and a receiver.  The receiver has six servo PWM signal outputs, four of which are used on the sampler.  Three of the outputs send signal to electronic speed controllers I  built myself, one of which is programmed to handle the feedback for Tygon tubing deployment, so there is no need for any central processing. </p1>
+    
+        <li>
+      <a href="esc.html">More about speed controllers here.</a></li>
     <h2>Use</h2>
     <p1>
       The sampler was first successfully used in the fall of 2015, and again in this summer of 2016. The sampler is light weight and has a hand grip, so it may be carried down a slope to a river by a single person without much difficulty.  The sampler’s single-person usability is key, because it allows sampling to be safely performed by one person (so an individual need not venture out onto the water alone). While not designed for use with a tether, one can be attatched as insurance against any failure of the sampler.  Fortunately, the tether has yet to come into play.</p1>
-
-    <div class="img45">
-      <img src="images/sampler_leaving_shore.jpg">
-		  <img src="images/sampler_in_river.jpg">
+        
+    <div class="img45left">
+        <figure>
+            <img src="images/sampler_leaving_shore.jpg">
+        </figure>
     </div>
+    <div class="img45left">
+        <figure>
+            <img src="images/sampler_in_river.jpg">
+        </figure>
+    </div>
+
 	</body>
 </html>
