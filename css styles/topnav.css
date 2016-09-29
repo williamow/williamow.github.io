@@ -119,7 +119,12 @@ figure {
 div.container{
     clear: right;
     overflow: auto;
-}	  
+}
+div.container-20{
+    min-width: 200px;
+    clear: right;
+    overflow: auto;
+}
 li {
     display:inline-block;
 }
