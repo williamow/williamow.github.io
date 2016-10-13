@@ -1,33 +1,10 @@
 <!DOCTYPE html>
 <html>
-  <link rel="stylesheet" type="text/css" href="css styles/topnav.css"></link>
-	<ul class="topnav" id="myTopnav">
-  		<li><a href="index.html">Home</a></li>
-  		<li><a href="sampler.html">Water Sampler</a></li>
-		<li>
-			<a href="esc.html">Speed Controller</a>
-		</li>
-        <li>
-			<a href="solarTEG.html">Solar TEG</a>
-		</li>
-  		<li class="icon">
-    		<a href="javascript:void(0);" onclick="myFunction()">&#9776;</a>
-  		</li>
-	</ul>
-	<script>
-		/* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */
-		function myFunction() {
-		var x = document.getElementById("myTopnav");
-		if (x.className === "topnav") {
-		x.className += " responsive";
-		} else {
-		x.className = "topnav";
-		}
-		}
-    </script>
-    <!--__________________________________________________________________________________________-->
-
+  <link rel="stylesheet" type="text/css" href="css styles/topnav.css">
 	<body>
+        <header>
+            <a href="index.html">Back to Projects Index</a>
+        </header>
 		<h1> Electronic Speed Controller </h1>
     <p1> I completed this circuit/project as a part of building my water sampling catamaran. The design actually went through four revisions, as various problems caused the first three controllers to fry in one way or another. The first three were somewhat unprotected circuit boards exposed to foreign material (dust, etc.) which was most likely their biggest problem, but the fourth revision has been in use on the water sampler for a while without any failure. </p1>
     <h2> Design Goals </h2>
@@ -53,10 +30,11 @@
     <h2>Final Design</h2>
     <p1>An ATTiny84 MCU controls the final speed controller.  The MCU runs on 5V that it must receive along with the signal on the servo PWM header during normal operation.  In addition to reading the input signal and controlling the speed controller's H-bridge, the MCU also operates a two-stage charge pump to control the high-side power MOSFETs. There is an AVR ISP header for programming the chip that can be used to modify the speed controller's function, and provide an extra input or output from the MCU for completing a servo control loop or anything else the hardware can handle. The H-bridge operates in a somewhat unique way. Each high side MOSFET is attached to a parallel RC circuit that keeps the high side switched off whenever there is any non-zero duty cycle to the complementary low side MOSFET. In this way, there are only two MOSFET drivers and no leakage current when the H-bridge is switching. </p1>
         <br>
-
+        <h2>Design Files</h2>
       <p1>Design files  are here for anyone interested, including EAGLE shematic / board, firmware written in Atmel Studio, and an STL file for 3D printing the case.</p1>
         <li><a href="files/esc.zip">design files</a></li>
-        
+        <br>
+        <br>
 	      <div class="img35">
         <figure>
           <img src="images/esc.jpg">

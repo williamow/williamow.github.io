@@ -1,38 +1,15 @@
 <!DOCTYPE html>
 <html>
   <link rel="stylesheet" type="text/css" href="css styles/topnav.css"></link>
-	<ul class="topnav" id="myTopnav">
-  		<li><a href="index.html">Home</a></li>
-  		<li><a href="sampler.html">Water Sampler</a></li>
-		<li>
-			<a href="esc.html">Speed Controller</a>
-		</li>
-        <li>
-			<a href="solarTEG.html">Solar TEG</a>
-		</li>
-  		<li class="icon">
-    		<a href="javascript:void(0);" onclick="myFunction()">&#9776;</a>
-  		</li>
-	</ul>
-	<script>
-		/* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */
-		function myFunction() {
-		var x = document.getElementById("myTopnav");
-		if (x.className === "topnav") {
-		x.className += " responsive";
-		} else {
-		x.className = "topnav";
-		}
-		}
-    </script>
-    <!--__________________________________________________________________________________________-->
-
-    <body>
+	<body>
+        <header>
+            <a href="index.html">Back to Projects Index</a>
+        </header>
         <h1>Solar Thermoelectric Generator (TEG)  Power Harvesting and Temperature Monitoring</h1>
         <h2>Project Motivation</h2>
-        <p1>This project was born out of an earlier project, a stand-alone, PV-powered, solar tracker.  AS plans for a second, improved solar tracker ran through my head, other ideas started to swirl around. Long story short, plans for a moving PV system turned into plans for a kinematically-static TEG powered by the sun, a far cry from the original idea.</p1>
+        <p1>This project was born out of an earlier project, a stand-alone, PV-powered, solar tracker.  As plans for a second, improved solar tracker ran through my head, other ideas started to swirl around. Long story short, plans for a moving PV system turned into plans for a kinematically-static TEG powered by the sun, a far cry from the original idea.</p1>
         <h2>TEG Operating Principles</h2>
-        <p1>A TEG operates on the thermoelectric effect.  It's the same phenomenon as peltier coolers or thermocouples.  The TEG can be modeled as a current source with a parallel resistance, R_TEG. Usable power generation is from current through the external R_LOAD. Assuming an effectively constant total current across all possible loads, maximum power is harvested when R_LOAD &#61; R_TEG.</p1>
+        <p1>A TEG operates on the thermoelectric effect.  It's the same phenomenon as Peltier coolers or thermocouples.  The TEG can be modeled as a current source with a parallel resistance, R_TEG. Usable power generation is from current through the external R_LOAD. Assuming an effectively constant total current across all possible loads, maximum power is harvested when R_LOAD &#61; R_TEG.</p1>
         <br>
         <div class="container">
             <div class="img20left">
@@ -57,13 +34,13 @@
                     <figcaption></figcaption>
                 </figure>
                 </div>
-            <p1>Possible TEG operating points, associated with changing R_load. Maximum power is at half of maximum current, which means that at maximum power the same amount of current must also pass though the internal resistance. The voltage is also the same, therefore load resistance and internal resistance are equal as well.</p1>
+            <p1>Possible TEG operating points, associated with changing R_LOAD. Maximum power is at half of maximum current, which means that at maximum power the same amount of current must also pass though the internal resistance. The voltage is also the same, therefore load resistance and internal resistance are equal as well.</p1>
             </div>
         </div>
         <h2>Power Harvesting Principles</h2>
         <p1>Converting low-voltage power from the TEG to a useful storage voltage ( 0.5v to 3.5-4.5v in this case) requires a boosting DC DC converter. Since the external load resistance is equal to internal resistance for the TEG to generate maximum power, a fixed frequency, fixed duty cycle converter can be designed to effectively operate the TEG at maximum useful power.  Math shows that the ideal fixed cycle converter only perfectly maintains a constant load across TEG operating powers (different TEG temperature differentials) if buck-boost switching is used, however a fixed cycle boost-only topology maintains a close enough load for the efficiency needs of this project, so a fixed cycle boost converter was used to simplify converter implementation.</p1>
         <h2>Project Construction</h2>
-        <p1>The thermoelectric unit must be given a thermal differential.  For this project, the hot side is a foot-square insulated aluminum plate with a flat black surface for absorbing sunlight. The cold side is a large CPU heatsink with a chimney to passively increase airflow.  Power harvesting, system temperature sensing, and relaying of data to Sparkfun's data logging website are integrated onto a single board that is mounted to the back of the collector plate. In current operation, the collector plate is mounted to a post, and the cooling chimney rises up from the back of the collector plate. </p1>
+        <p1>The thermoelectric unit must be given a thermal differential.  For this project, the hot side is a foot-square insulated aluminum plate with a flat black surface for absorbing sunlight. The cold side is a large CPU heat sink with a chimney to passively increase airflow.  Power harvesting, system temperature sensing, and relaying of data to SparkFun's data logging website are integrated onto a single board that is mounted to the back of the collector plate. In current operation, the collector plate is mounted to a post, and the cooling chimney rises up from the back of the collector plate. </p1>
         <div class="container">
             <div class="img35left">
                 <figure>
@@ -74,11 +51,11 @@
             <div class="img35left">
                 <figure>
                     <img src="images/teg_board_bottom.jpg">
-                    <figcaption>TEG system pcb bottom, with DC DC converter.</figcaption>
+                    <figcaption>TEG system PCB bottom, with DC DC converter.</figcaption>
                 </figure>
                 <figure>
                     <img src="images/teg_board_top.jpg">
-                    <figcaption>TEG system pcb top, with battery holder and socket for Red Bear Lab's Wifi Mini MCU board.</figcaption>
+                    <figcaption>TEG system PCB top, with battery holder and socket for Red Bear Lab's WiFi Mini MCU board.</figcaption>
                 </figure>
             </div>
         </div>

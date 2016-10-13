@@ -1,3 +1,19 @@
+header {
+    margin: 0;
+    padding: 0, auto;
+    background-color:darkblue;
+    text-align: center;
+}
+header a{
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 5pt 10pt;
+    //text-decoration: none;
+    transition: 0.3s;
+    font-size: 15pt;
+}
+
 /* Remove margins and padding from the list, and add a black background color */
 ul.topnav {
     list-style-type: none;
@@ -53,8 +69,9 @@ ul.topnav li.icon {display: none;}
   }
 }
 
+
 body {
-      background-color: powderblue;
+      background-color: aqua;
       max-width: 700pt;
       margin:0px auto;
 	  padding-top: 30px;
@@ -87,8 +104,17 @@ div.img35 {
 h1 {
 	  text-align: center;
 }
+h0 {
+	  text-align: center;
+    color: white;
+    font-size: 22pt;
+}
 p {
 	  text-align: center;
+}
+p {
+	  text-align: center;
+    color:white;
 }
 p1{
     display:block;
@@ -127,4 +153,36 @@ div.container-20{
 }
 li {
     display:inline-block;
+}
+div.previewparent{
+    width: 33%;
+    float: left;
+}
+div.preview{
+    margin: 5pt;
+    padding: 5pt;
+    background-color: darkblue;
+    text-align: center;
+}
+div.indexcaption{
+    height: 30pt;
+    text-align: center;
+}
+p9{
+    width: 100%;
+    font-size: 13pt;
+    color: white;
+    text-align: center;
+    padding: 2pt;
+    text-decoration: none;
+    text-decoration-color: darkblue;
+}
+@media (max-width:500pt){
+    div.previewparent{width:50%;}
+}
+@media (max-width:350pt){
+    div.previewparent{width:100%;
+    max-width:200pt;
+    float:none;
+    margin: 0pt auto;}
 }
