@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <link rel="stylesheet" type="text/css" href="css styles/topnav.css"></link>
+	<body>
+        <header>
+            <a href="index.html">Back to Projects Index</a>
+        </header>
+        <h1>Miniature Linear Servo</h1>
+        <div class="movie60">
+            <iframe  src="https://www.youtube.com/embed/3DEh-rQ_pPc" frameborder="0" allowfullscreen></iframe>
+        </div>
+        
+        <div class="container">
+            <div class="img45">
+                <figure>
+                    <img src="images/linear_servo_side.jpg">
+                    <figcaption>A Complete Linear Servo</figcaption>
+                </figure>
+            </div>
+            <div>
+                <figure>
+                    <img src="images/linear_servo_complete_guts.jpg">
+                    <figcaption>Disassembled</figcaption>
+                </figure>
+            </div>
+        </div>
+        <h2>Project Origin</h2>
+        <p1>The desire for a miniature linear actuator manifested from the design for another project, a sun tracker that was never built.  A few prototype electric linear actuators were made at first for the original solar tracker project, but the linear servo design quickly became it's own full project.</p1>
+        <h2>Project Design Goals</h2>
+        <p1>To build a linear servo, with an electrical control interface identical to that used in standard rotational hobby servo motors, in a small, low-power format at low cost, with ease of manufacturing suitable to small-scale home production.</p1>
+        <h2>Mechanical Design</h2>
+        <p1>I settled upon 6-32 nut and threaded rod for translating rotation from a motor to linear movement.  Without a ball thread there is significant friction, however that friction was deemed acceptable for the low-cost, miniature design envelope.  A threaded rod shaft is coupled using a collar and epoxy onto a micro gearmotor, of a standard format for easy sourcing and a flexible gear ratio.  The actuator's piston rod and housing are commonly available square brass telescoping tubing, 1/4" OD for the housing and 7/32" OD for the piston rod.  A press-fit threaded insert, secured with a bit of epoxy, serves as the actuator's nut inside the piston rod tubing.  To complete the body, 3D printed casing connects to the brass housing and the gear motor, as well as providing mounting points for clevises on both ends of the linear actuator.  Rounded out, the linear servo can extend from six to nine inches with configurable speed and force, depending on the micro gearmotor chosen.</p1>
+        <br>
+        <p1>Some of the COTS components used:</p1>
+        <div class="container">
+            <div class="img20left">
+                <figure>
+                    <img src="images/lin_k&s_tubing.jpg">
+                    <figcaption>Square brass tubing from K&amp;S</figcaption>
+                </figure>
+            </div>
+            <div class="img20left">
+                <figure>
+                    <img src="images/lin_micro_mo.jpg">
+                    <figcaption>Micro metal gearmotor</figcaption>
+                </figure>
+            </div>
+            <div class="img20left">
+                <figure>
+                    <img src="images/lin_threaded.jpg">
+                    <figcaption>Threaded insert, image from mscdirect.com</figcaption>
+                </figure>
+            </div>
+        </div>
+        <br>
+        <p1>Linear servo in assembly:</p1>
+        <div class="container">
+            <div class="img45left">
+                <figure>
+                    <img src="images/linear_servo_small_production.jpg">
+                    <figcaption>Small scale production of six linear servos</figcaption>
+                </figure>
+            </div>
+        </div>
+        <h2>Actuator electronics and control</h2>
+        <p1>The linear servo connects via a three pin header identical to those on hobby servo motors, and interprets a PWM signal with pulses 1ms to 2ms wide as a percent of extension.  The electronics also must get feedback about the position of the piston rod.  Thanks to the friction of a 6-32 threaded rod, back drive is impossible so only a single channel optical encoder is needed for feedback, and the ATtiny 25 MCU that controls the linear servo can use it's flash memory to keep track of the piston rod's position.  The encoder is custom built, and is integrated tightly into the electrical and mechanical design allowing for it to also serve as a limit switch for detecting piston rod end of travel (only at contracted extreme) at a low component cost.  The ATtiny MCU directly monitors a photosensor to complete the encoder system, and combines that with the control pwm to decide an output for the H-bridge motor controller.  The entire circuit is fit on a small board that fits inside the printed case, flat against one side of the gearmotor.</p1>
+        <div class="container">
+        <div class="img20left">
+                <figure>
+                    <img src="images/linear_servo_optical_encoder.jpg">
+                    <figcaption>IR photosensor on circuit board faces motor shaft to detect flat spot</figcaption>
+                </figure>
+            </div>
+        </div>
+        
+</body>

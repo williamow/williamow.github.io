@@ -186,3 +186,13 @@ p9{
     float:none;
     margin: 0pt auto;}
 }
+iframe {
+    width: 100%;
+    height: 236pt
+}
+
+.movie60 {
+    width: 100%;
+	  max-width: 420pt;
+	  margin:0px auto;
+}
