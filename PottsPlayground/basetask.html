@@ -1,0 +1,284 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Base Task &#8212; PottsPlayground  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Specific Tasks" href="tasks.html" />
+    <link rel="prev" title="Gettng Started" href="gettingstarted.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="base-task">
+<h1>Base Task<a class="headerlink" href="#base-task" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="PottsPlayground.Tasks.BaseTask">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">PottsPlayground.Tasks.</span></span><span class="sig-name descname"><span class="pre">BaseTask</span></span><a class="headerlink" href="#PottsPlayground.Tasks.BaseTask" title="Permalink to this definition">¶</a></dt>
+<dd><p>Provides a framework for creating, storing, and manipulating Potts models.  Provides a bridge between the semantic structure
+of various combinatorial problems and a Potts-model format used by the Potts annealing engine.  Usually instantiated as a base class,
+but can also be used alone to create arbitrary Potts model tasks.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="PottsPlayground.Tasks.BaseTask.AddKernel">
+<span class="sig-name descname"><span class="pre">AddKernel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">creator</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">j</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PottsPlayground.Tasks.BaseTask.AddKernel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds a connection between spin i and spin j.  The connection is a weight matrix unto itself,
+with size [qSizes[i], qSizes[j]].  ‘creator’ is a function that accepts a single boolean arguement;
+when true, it returns a string identifier for the weight kernel between spins i and j.  If false, 
+it returns the actual weight kernel.  This is designed to balance ease of use and efficiency:
+if the same weight kernel is used between many pairs of Potts spins, the weight kernel will only be
+generated once (which may not be trivial depending on how it is generated), but the user does not need
+to keep track of how many times a given weight kernel was used.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>creator</strong> – A lambda function that takes a single boolean arguement.</p></li>
+<li><p><strong>i</strong> (<em>int</em>) – Index of first spin.</p></li>
+<li><p><strong>j</strong> (<em>int</em>) – Index of second spin.</p></li>
+<li><p><strong>weight</strong> (<em>float</em>) – Scales the entire weight kernel for this connection only.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PottsPlayground.Tasks.BaseTask.CompileKernels">
+<span class="sig-name descname"><span class="pre">CompileKernels</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PottsPlayground.Tasks.BaseTask.CompileKernels" title="Permalink to this definition">¶</a></dt>
+<dd><p>After all of the connections in a model have been added via AddKernel, the weight kernels are assembled into
+Numpy arrays with specific formats, tailored for use in C++/CUDA sampling code. The results are stored in the Task object.</p>
+<p>The weight kernels are stored in a dense format in a 3-D Numpy array.  The first dimension is the kernel index,
+while the second and third dimensions correspond to the magnetization states of the connected spins.</p>
+<p>A second 3-D NUmpy array, the kernel map, specifies which kernel connects any given pair of spins.  It is stored in
+a sparse format.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PottsPlayground.Tasks.BaseTask.EnergyBands">
+<span class="sig-name descname"><span class="pre">EnergyBands</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PottsPlayground.Tasks.BaseTask.EnergyBands" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the energy of every possible state.  Since the number of states grows eponentially,
+this can only be used with very small problem instances, and has been used just for illustrative purposes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return valid_energies<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A list of energies that correspond to valid model states.  Validity is defined by child classes.</p>
+</dd>
+<dt class="field-even">Return invalid_energies<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of energies that correspond to invalid model states.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PottsPlayground.Tasks.BaseTask.EvalCost">
+<span class="sig-name descname"><span class="pre">EvalCost</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PottsPlayground.Tasks.BaseTask.EvalCost" title="Permalink to this definition">¶</a></dt>
+<dd><p>Python-domain calculation of the energy of a state, based on compiled kernels and sparse kernel map.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>state</strong> (<em>1-D numpy array of ints.</em>) – Magnetization values for each of the spins in the model.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Energy/Cost of the model when in the given state.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PottsPlayground.Tasks.BaseTask.EvalDDE">
+<span class="sig-name descname"><span class="pre">EvalDDE</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">m_old</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">m_new</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PottsPlayground.Tasks.BaseTask.EvalDDE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the delta-delta-energy of all possible magnetizations of all spins.
+DDE is how much the DE of each action changes, when an action is taken.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>i</strong> (<em>int</em>) – Index of changing spin that creates the DDE.</p></li>
+<li><p><strong>m_old</strong> (<em>int</em>) – new value of spin i</p></li>
+<li><p><strong>m_new</strong> (<em>int</em>) – new value of spin i</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>DDE value for the all magnetizations of all spins.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2-D Numpy float array, N_{spins}X N_{magnetizations}</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PottsPlayground.Tasks.BaseTask.EvalDE">
+<span class="sig-name descname"><span class="pre">EvalDE</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">m_new</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PottsPlayground.Tasks.BaseTask.EvalDE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates how much the total energy would change if spin i had magnetization m_new.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>state</strong> (<em>1-D numpy array of ints.</em>) – Magnetization values for each of the spins in the model.</p></li>
+<li><p><strong>i</strong> (<em>int</em>) – Spin index of interest.</p></li>
+<li><p><strong>m_new</strong> (<em>int</em>) – new value of spin i</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Change in energy if spin i had magnetization m_new.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PottsPlayground.Tasks.BaseTask.EvalPE">
+<span class="sig-name descname"><span class="pre">EvalPE</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">m</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PottsPlayground.Tasks.BaseTask.EvalPE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the potential energy of state m of node i, given state.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>state</strong> (<em>1-D numpy array of ints.</em>) – Magnetization values for each of the spins in the model.</p></li>
+<li><p><strong>i</strong> (<em>int</em>) – Spin index of interest.</p></li>
+<li><p><strong>m</strong> (<em>int</em>) – value of spin i</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The energy that would potentially be added to the total if spin i was in state m.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PottsPlayground.Tasks.BaseTask.InitKernelManager">
+<span class="sig-name descname"><span class="pre">InitKernelManager</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PottsPlayground.Tasks.BaseTask.InitKernelManager" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initializes the kernel manager system, which is used for building up weight matrices piece by piece,
+by initializing a few empty variables.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PottsPlayground.Tasks.BaseTask.SetPartitions">
+<span class="sig-name descname"><span class="pre">SetPartitions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">qSizes</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PottsPlayground.Tasks.BaseTask.SetPartitions" title="Permalink to this definition">¶</a></dt>
+<dd><p>First step in creating a Potts model. The qSizes vector describes the structure of the Potts Model state, including how many spins there are and
+how many states each spin may take.  The spins do not need to all have the same number of states.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>qSizes</strong> (<em>1-D Numpy array of ints</em><em> or </em><em>list</em><em>[</em><em>int</em><em>]</em>) – The number of possibilities for each magnetization state of the Potts model.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">PottsPlayground</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="gettingstarted.html">Gettng Started</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Base Task</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tasks.html">Specific Tasks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="taskmodifiers.html">Task Modifiers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="annealing.html">Annealing</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="gettingstarted.html" title="previous chapter">Gettng Started</a></li>
+      <li>Next: <a href="tasks.html" title="next chapter">Specific Tasks</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2024, William Whitehead.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.3.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/basetask.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

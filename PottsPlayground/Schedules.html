@@ -1,0 +1,189 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Annealing Schedules &#8212; PottsPlayground  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Weight Kernels" href="kernels.html" />
+    <link rel="prev" title="Annealing" href="annealing.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="module-PottsPlayground.Schedules">
+<span id="annealing-schedules"></span><h1>Annealing Schedules<a class="headerlink" href="#module-PottsPlayground.Schedules" title="Permalink to this headline">¶</a></h1>
+<p>A collection of definitions for annealing schedules.  Each function returns a 2-D numpy array
+that can be interpreted as a piecewise linear function inside of PottsPlayground.Anneal.</p>
+<p>The piecewise linear function defines multiple aspects of an annealing run: the number of iterations/spin updates,
+a changing temperature as annealing progresses, and at what points annealing should be temporarily halted
+so that intermediate data can be recorded.  The intermediate points are the discontinuities in the Piecewise linear function.
+Note that progress can also be recorded more frequently, on a set periodic frequency, using the 
+nReports option of the PottsPlayground.Anneal function.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="PottsPlayground.Schedules.LinearTemp">
+<span class="sig-prename descclassname"><span class="pre">PottsPlayground.Schedules.</span></span><span class="sig-name descname"><span class="pre">LinearTemp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">niters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temp2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0001</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PottsPlayground.Schedules.LinearTemp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Anneal a model at a linearly changing temperature, starting at temp and ending at temp2.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>niters</strong> (<em>int</em>) – The total number of updates/spin flips over the course of the annealing run.</p></li>
+<li><p><strong>temp</strong> (<em>float</em>) – Initial temperature.</p></li>
+<li><p><strong>temp2</strong> (<em>float</em>) – Final temperature.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="PottsPlayground.Schedules.SawtoothTempLog2Space">
+<span class="sig-prename descclassname"><span class="pre">PottsPlayground.Schedules.</span></span><span class="sig-name descname"><span class="pre">SawtoothTempLog2Space</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">niters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">MinTemp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nTeeth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">FirstTooth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PottsPlayground.Schedules.SawtoothTempLog2Space" title="Permalink to this definition">¶</a></dt>
+<dd><p>Anneal a model according to a sawtooth temperature waveform.
+The duration of each sawtooth increases exponentially.
+Unless nReports is defined in the annealing run, a sample will be recorded at the end of each
+sawtooth when the model has been frozen into at least a local minima.
+Allows the “problem solving” capacity of an annealing setup to be observed more directly,
+especially for models that only mix at high temperatures but only settle into valid states at low temperatures.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>niters</strong> (<em>int</em>) – The total number of updates/spin flips over the course of the annealing run.</p></li>
+<li><p><strong>temp</strong> (<em>float</em>) – Initial, high temperature of the sawtooth temperature profile.</p></li>
+<li><p><strong>MinTemp</strong> (<em>float</em>) – The temperature at the end of each linearly changing sawtooth cycle.</p></li>
+<li><p><strong>nTeeth</strong> (<em>int</em>) – The number of sawtooth cycles over the course of the annealing run.  The duration ratio between teeth is calculated to meet this spec.</p></li>
+<li><p><strong>FirstTooth</strong> (<em>int</em>) – How many iterations the first tooth should be, or equivalently.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="PottsPlayground.Schedules.constTemp">
+<span class="sig-prename descclassname"><span class="pre">PottsPlayground.Schedules.</span></span><span class="sig-name descname"><span class="pre">constTemp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">niters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temp</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PottsPlayground.Schedules.constTemp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Anneal a model at a constant temperature for the given number of iterations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>niters</strong> (<em>int</em>) – The total number of updates/spin flips over the course of the annealing run.</p></li>
+<li><p><strong>temp</strong> (<em>float</em>) – Computational temperature at which the model operates.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="PottsPlayground.Schedules.constTempLog2Space">
+<span class="sig-prename descclassname"><span class="pre">PottsPlayground.Schedules.</span></span><span class="sig-name descname"><span class="pre">constTempLog2Space</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">niters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nReports</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PottsPlayground.Schedules.constTempLog2Space" title="Permalink to this definition">¶</a></dt>
+<dd><p>Anneal a model at a constant temperature for the given number of iterations.
+Defines nReports breakpoints spaced logarithmically, 
+so that both fast and slow dynamics of model evolution can be recorded.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>niters</strong> (<em>int</em>) – The total number of updates/spin flips over the course of the annealing run.</p></li>
+<li><p><strong>temp</strong> (<em>float</em>) – Constant temperature used during sampling.</p></li>
+<li><p><strong>nReports</strong> (<em>int</em>) – The number of times over the course of annealng that the model is stopped and measured.  The duration ratio between samples is calculated to meet this spec.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">PottsPlayground</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="gettingstarted.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basetask.html">Base Task</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tasks.html">Specific Tasks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="taskmodifiers.html">Task Modifiers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="annealing.html">Annealing</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Annealing Schedules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="kernels.html">Weight Kernels</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="annealing.html" title="previous chapter">Annealing</a></li>
+      <li>Next: <a href="kernels.html" title="next chapter">Weight Kernels</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2024, William Whitehead.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.3.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/Schedules.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

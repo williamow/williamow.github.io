@@ -1,0 +1,135 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Weight Kernels &#8212; PottsPlayground  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Annealing Schedules" href="Schedules.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="module-PottsPlayground.Kernels">
+<span id="weight-kernels"></span><h1>Weight Kernels<a class="headerlink" href="#module-PottsPlayground.Kernels" title="Permalink to this headline">¶</a></h1>
+<p>Commonly used kernel definitions for constructing Potts models.
+Each ‘kernel’ is a weight matrix between two Potts spins <em>i</em> and <em>j</em>.
+Given a model state, each kernel <span class="math notranslate nohighlight">\(W_{i,j}\)</span> contributes energy <span class="math notranslate nohighlight">\(W_{i,j}[m_i,m_j]\)</span>
+to the overall model, where <span class="math notranslate nohighlight">\(m_i\)</span> and <span class="math notranslate nohighlight">\(m_j\)</span> are the spin values of Potts nodes <span class="math notranslate nohighlight">\(i\)</span> and <span class="math notranslate nohighlight">\(j\)</span>.</p>
+<p>Each kernel ‘definition’ is actually a function that returns either a string identifier for the kernel
+or the kernel itself.  This is designed so that complex kernels that take a long time to construct are
+only constructed once for each problem (A large problem might have thousands of copies of a big kernel that 
+is created element by element).  Kernels in this module should work seemlessly with the baseTask AddKernel method,
+however many nontrivial applications will require custom-designed kernels.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="PottsPlayground.Kernels.BinaryQuadratic">
+<span class="sig-prename descclassname"><span class="pre">PottsPlayground.Kernels.</span></span><span class="sig-name descname"><span class="pre">BinaryQuadratic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PottsPlayground.Kernels.BinaryQuadratic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Kernel definition for Binary Quadratic Ising models.
+Is simply</p>
+<dl class="simple">
+<dt>K = [[0 0]</dt><dd><p>[0    1]]</p>
+</dd>
+</dl>
+<p>Since the processing component of PottsPlayground additionally weighs each kernel,
+the BinaryQuadratic kernel is a fixed value, allowing a simplidied Ising computation mode.</p>
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">PottsPlayground</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="gettingstarted.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basetask.html">Base Task</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tasks.html">Specific Tasks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="taskmodifiers.html">Task Modifiers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="annealing.html">Annealing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Schedules.html">Annealing Schedules</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Weight Kernels</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="Schedules.html" title="previous chapter">Annealing Schedules</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2024, William Whitehead.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.3.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/kernels.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
