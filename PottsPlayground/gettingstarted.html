@@ -1,24 +1,22 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en" data-content_root="./">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Getting Started &#8212; PottsPlayground  documentation</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/classic.css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/classic.css?v=0dc0530d" />
     
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/doctools.js"></script>
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Base Task" href="basetask.html" />
-    <link rel="prev" title="Welcome to PottsPlayground’s documentation!" href="index.html" /> 
+    <link rel="next" title="Potts Model Constructor" href="basetask.html" />
+    <link rel="prev" title="Fast Potts Models in Python" href="index.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -30,10 +28,10 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="basetask.html" title="Base Task"
+          <a href="basetask.html" title="Potts Model Constructor"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="index.html" title="Welcome to PottsPlayground’s documentation!"
+          <a href="index.html" title="Fast Potts Models in Python"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">PottsPlayground  documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Getting Started</a></li> 
@@ -46,13 +44,13 @@
           <div class="body" role="main">
             
   <section id="getting-started">
-<h1>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
+<h1>Getting Started<a class="headerlink" href="#getting-started" title="Link to this heading">¶</a></h1>
 <section id="installation">
-<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">¶</a></h2>
 <p>A key feaure of PottsPlayground is support for GPU acceleration, however PottsPlayground can compile and run without GPU support as well.  For now, PottsPlayground is available as a source install via <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">PottsPlayground</span></code>.  If the setup process finds nvcc (the compiler for Nvidia GPU support) PottsPlayground will attempt to build for GPU execution; otherwise, it will build for CPU only.  Note that even if nvcc is installed, it might not be on the system path.  PottsPlayground prints a GPU status report when imported, which will indicate if it was built with or without GPU support, and whether or not the module can find a GPU to use.</p>
 </section>
 <section id="using-built-in-tasks">
-<h2>Using Built-in Tasks<a class="headerlink" href="#using-built-in-tasks" title="Permalink to this headline">¶</a></h2>
+<h2>Using Built-in Tasks<a class="headerlink" href="#using-built-in-tasks" title="Link to this heading">¶</a></h2>
 <p>A few example tasks are built-in as a reference and for easy benchmarking.  To create a random instance of the traveling salesman problem and “solve” for it’s minimum tour length, all one needs to do is:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">PottsPlayground</span>
 
@@ -72,63 +70,56 @@
 <p>Which is obviously not an optimal solution, but increasing the number of iterations, details of the annealing algorithm, etc. can get you there.</p>
 </section>
 <section id="creating-a-new-task">
-<h2>Creating a New Task<a class="headerlink" href="#creating-a-new-task" title="Permalink to this headline">¶</a></h2>
+<h2>Creating a New Task<a class="headerlink" href="#creating-a-new-task" title="Link to this heading">¶</a></h2>
 <p>New/custom tasks can be created using the BaseTask class, which is what the built-in examples do internally.  For example, PottsPlayground can be used to create a 3-spin Ising model of an AND gate like so:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#manually create an Ising model of a logical AND gate, C = A&amp;B</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span>
 <span class="kn">import</span> <span class="nn">PottsPlayground</span>
 <span class="kn">from</span> <span class="nn">PottsPlayground.Kernels</span> <span class="kn">import</span> <span class="n">BinaryQuadratic</span> <span class="k">as</span> <span class="n">BQK</span>
 
-<span class="c1">#manually create an Ising model of an logical AND gate, C = A&amp;B</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;C = A &amp; B&quot;</span><span class="p">)</span>
-<span class="n">andgate</span> <span class="o">=</span> <span class="n">PottsPlayground</span><span class="o">.</span><span class="n">Tasks</span><span class="o">.</span><span class="n">BaseTask</span><span class="p">()</span>
+<span class="n">andgate</span> <span class="o">=</span> <span class="n">PottsPlayground</span><span class="o">.</span><span class="n">PottsModel</span><span class="p">()</span>
 
 <span class="c1">#three variables, each which take on values of 0 or 1</span>
-<span class="n">andgate</span><span class="o">.</span><span class="n">SetPartitions</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">andgate</span><span class="o">.</span><span class="n">AddSpins</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">])</span>
 
-<span class="n">andgate</span><span class="o">.</span><span class="n">InitKernelManager</span><span class="p">()</span>
+<span class="c1">#BQK is the binary quadratic kernel,</span>
+<span class="c1">#which allows the simplification of the Potts Hamiltonian to the Ising Hamiltonian:</span>
+<span class="c1">#Potts: E = sum Wij(mi,mj) -&gt;</span>
+<span class="c1">#Binary Quadratic Ising: E = sum Wij*mi*mj with m valued as 0 or 1</span>
+<span class="n">andgate</span><span class="o">.</span><span class="n">AddWeight</span><span class="p">(</span><span class="n">BQK</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">andgate</span><span class="o">.</span><span class="n">AddWeight</span><span class="p">(</span><span class="n">BQK</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="n">weight</span><span class="o">=-</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">andgate</span><span class="o">.</span><span class="n">AddWeight</span><span class="p">(</span><span class="n">BQK</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="n">weight</span><span class="o">=-</span><span class="mi">2</span><span class="p">)</span>
 
-<span class="c1">#connect A to B</span>
-<span class="n">andgate</span><span class="o">.</span><span class="n">AddKernel</span><span class="p">(</span><span class="n">BQK</span><span class="p">,</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">andgate</span><span class="o">.</span><span class="n">AddKernel</span><span class="p">(</span><span class="n">BQK</span><span class="p">,</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">andgate</span><span class="o">.</span><span class="n">AddBias</span><span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span> <span class="c1">#other two Spins need no biases</span>
 
-<span class="c1">#connect A to C</span>
-<span class="n">andgate</span><span class="o">.</span><span class="n">AddKernel</span><span class="p">(</span><span class="n">BQK</span><span class="p">,</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">j</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">weight</span><span class="o">=-</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">andgate</span><span class="o">.</span><span class="n">AddKernel</span><span class="p">(</span><span class="n">BQK</span><span class="p">,</span> <span class="n">i</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">weight</span><span class="o">=-</span><span class="mi">2</span><span class="p">)</span>
-
-<span class="c1">#connect B to C</span>
-<span class="n">andgate</span><span class="o">.</span><span class="n">AddKernel</span><span class="p">(</span><span class="n">BQK</span><span class="p">,</span> <span class="n">i</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">weight</span><span class="o">=-</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">andgate</span><span class="o">.</span><span class="n">AddKernel</span><span class="p">(</span><span class="n">BQK</span><span class="p">,</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">weight</span><span class="o">=-</span><span class="mi">2</span><span class="p">)</span>
-
-<span class="n">andgate</span><span class="o">.</span><span class="n">biases</span><span class="p">[</span><span class="mi">0</span><span class="p">,:]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
-<span class="n">andgate</span><span class="o">.</span><span class="n">biases</span><span class="p">[</span><span class="mi">1</span><span class="p">,:]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
-<span class="n">andgate</span><span class="o">.</span><span class="n">biases</span><span class="p">[</span><span class="mi">2</span><span class="p">,:]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
-
-<span class="n">andgate</span><span class="o">.</span><span class="n">CompileKernels</span><span class="p">()</span>
+<span class="n">andgate</span><span class="o">.</span><span class="n">Compile</span><span class="p">()</span>
 
 <span class="c1">#run the model at a constant temperature to capture statistics:</span>
 <span class="n">temp</span> <span class="o">=</span> <span class="n">PottsPlayground</span><span class="o">.</span><span class="n">Schedules</span><span class="o">.</span><span class="n">constTemp</span><span class="p">(</span><span class="n">niters</span><span class="o">=</span><span class="mf">1e6</span><span class="p">,</span> <span class="n">temp</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">results</span> <span class="o">=</span> <span class="n">PottsPlayground</span><span class="o">.</span><span class="n">Anneal</span><span class="p">(</span><span class="n">andgate</span><span class="p">,</span> <span class="n">temp</span><span class="p">,</span> <span class="n">nReports</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="mf">1e4</span><span class="p">))</span>
 
-<span class="c1">#plot the distribution of states:</span>
 <span class="n">samples</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;AllStates&quot;</span><span class="p">]</span>
-<span class="n">sample_indices</span> <span class="o">=</span> <span class="n">samples</span><span class="p">[:,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">samples</span><span class="p">[:,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="mi">4</span><span class="o">*</span><span class="n">samples</span><span class="p">[:,</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">sample_indices</span> <span class="o">=</span> <span class="p">(</span><span class="n">samples</span><span class="p">[:,</span><span class="mi">0</span><span class="p">,</span> <span class="n">andgate</span><span class="o">.</span><span class="n">IndexOf</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">)]</span>
+                                <span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">samples</span><span class="p">[:,</span><span class="mi">0</span><span class="p">,</span><span class="n">andgate</span><span class="o">.</span><span class="n">IndexOf</span><span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="p">)]</span>
+                                <span class="o">+</span><span class="mi">4</span><span class="o">*</span><span class="n">samples</span><span class="p">[:,</span><span class="mi">0</span><span class="p">,</span><span class="n">andgate</span><span class="o">.</span><span class="n">IndexOf</span><span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">)])</span>
 <span class="n">unique</span><span class="p">,</span> <span class="n">counts</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">sample_indices</span><span class="p">,</span> <span class="n">return_counts</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">unique</span><span class="p">,</span> <span class="n">counts</span><span class="p">):</span>
         <span class="n">pr</span> <span class="o">=</span> <span class="n">c</span><span class="o">/</span><span class="n">sample_indices</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;A=</span><span class="si">%i</span><span class="s2">, B=</span><span class="si">%i</span><span class="s2">, C=</span><span class="si">%i</span><span class="s2"> -&gt; Pr=</span><span class="si">%.3f</span><span class="s2">&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">i</span><span class="o">%</span><span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="n">i</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">%</span><span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="n">i</span><span class="o">/</span><span class="mi">4</span><span class="p">)</span><span class="o">%</span><span class="mi">2</span><span class="p">,</span> <span class="n">pr</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Pr(A=</span><span class="si">%i</span><span class="s2">, B=</span><span class="si">%i</span><span class="s2">, C=</span><span class="si">%i</span><span class="s2">) = </span><span class="si">%.3f</span><span class="s2">&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">i</span><span class="o">%</span><span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="n">i</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">%</span><span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="n">i</span><span class="o">/</span><span class="mi">4</span><span class="p">)</span><span class="o">%</span><span class="mi">2</span><span class="p">,</span> <span class="n">pr</span><span class="p">))</span>
 </pre></div>
 </div>
 <p>Which when run should yield a set of probabilities where the valid states where C = A &amp; B is true are all equally likely, and the invalid states are unlikely:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">C</span> <span class="o">=</span> <span class="n">A</span> <span class="o">&amp;</span> <span class="n">B</span>
-<span class="n">A</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">B</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="mi">0</span> <span class="o">-&gt;</span> <span class="n">Pr</span><span class="o">=</span><span class="mf">0.197</span>
-<span class="n">A</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">B</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="mi">0</span> <span class="o">-&gt;</span> <span class="n">Pr</span><span class="o">=</span><span class="mf">0.188</span>
-<span class="n">A</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">B</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="mi">0</span> <span class="o">-&gt;</span> <span class="n">Pr</span><span class="o">=</span><span class="mf">0.193</span>
-<span class="n">A</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">B</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="mi">0</span> <span class="o">-&gt;</span> <span class="n">Pr</span><span class="o">=</span><span class="mf">0.072</span>
-<span class="n">A</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">B</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="mi">1</span> <span class="o">-&gt;</span> <span class="n">Pr</span><span class="o">=</span><span class="mf">0.008</span>
-<span class="n">A</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">B</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="mi">1</span> <span class="o">-&gt;</span> <span class="n">Pr</span><span class="o">=</span><span class="mf">0.073</span>
-<span class="n">A</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">B</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="mi">1</span> <span class="o">-&gt;</span> <span class="n">Pr</span><span class="o">=</span><span class="mf">0.074</span>
-<span class="n">A</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">B</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="mi">1</span> <span class="o">-&gt;</span> <span class="n">Pr</span><span class="o">=</span><span class="mf">0.194</span>
+<span class="n">Pr</span><span class="p">(</span><span class="n">A</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">B</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">=</span> <span class="mf">0.194</span>
+<span class="n">Pr</span><span class="p">(</span><span class="n">A</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">B</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">=</span> <span class="mf">0.195</span>
+<span class="n">Pr</span><span class="p">(</span><span class="n">A</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">B</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">=</span> <span class="mf">0.191</span>
+<span class="n">Pr</span><span class="p">(</span><span class="n">A</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">B</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">=</span> <span class="mf">0.075</span>
+<span class="n">Pr</span><span class="p">(</span><span class="n">A</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">B</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="mf">0.007</span>
+<span class="n">Pr</span><span class="p">(</span><span class="n">A</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">B</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="mf">0.069</span>
+<span class="n">Pr</span><span class="p">(</span><span class="n">A</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">B</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="mf">0.071</span>
+<span class="n">Pr</span><span class="p">(</span><span class="n">A</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">B</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="mf">0.199</span>
 </pre></div>
 </div>
 <p>In general, sucessfully representing more complicated tasks as Potts models benefits from more structured code for calculating weights and tabulating the mapping between Potts spins and task semantics.</p>
@@ -150,10 +141,10 @@
 <li class="toctree-l2"><a class="reference internal" href="#creating-a-new-task">Creating a New Task</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="basetask.html">Base Task</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tasks.html">Specific Tasks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="taskmodifiers.html">Task Modifiers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="annealing.html">Annealing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basetask.html">Potts Model Constructor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tasks.html">Built-in Tasks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="taskmodifiers.html">Model Converters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="annealing.html">Running a Model</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Schedules.html">Annealing Schedules</a></li>
 <li class="toctree-l1"><a class="reference internal" href="kernels.html">Weight Kernels</a></li>
 </ul>
@@ -172,18 +163,18 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="basetask.html" title="Base Task"
+          <a href="basetask.html" title="Potts Model Constructor"
              >next</a> |</li>
         <li class="right" >
-          <a href="index.html" title="Welcome to PottsPlayground’s documentation!"
+          <a href="index.html" title="Fast Potts Models in Python"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">PottsPlayground  documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Getting Started</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2024, William Whitehead.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    &#169; Copyright 2024, William Whitehead.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
     </div>
   </body>
 </html>

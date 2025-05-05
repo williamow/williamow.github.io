@@ -1,24 +1,22 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en" data-content_root="./">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Task Modifiers &#8212; PottsPlayground  documentation</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/classic.css" />
+    <title>Model Converters &#8212; PottsPlayground  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/classic.css?v=0dc0530d" />
     
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/doctools.js"></script>
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Annealing" href="annealing.html" />
-    <link rel="prev" title="Specific Tasks" href="tasks.html" /> 
+    <link rel="next" title="Running a Model" href="annealing.html" />
+    <link rel="prev" title="Built-in Tasks" href="tasks.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -30,13 +28,13 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="annealing.html" title="Annealing"
+          <a href="annealing.html" title="Running a Model"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="tasks.html" title="Specific Tasks"
+          <a href="tasks.html" title="Built-in Tasks"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">PottsPlayground  documentation</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Task Modifiers</a></li> 
+        <li class="nav-item nav-item-this"><a href="">Model Converters</a></li> 
       </ul>
     </div>  
 
@@ -45,21 +43,22 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <section id="task-modifiers">
-<h1>Task Modifiers<a class="headerlink" href="#task-modifiers" title="Permalink to this headline">¶</a></h1>
+  <section id="model-converters">
+<h1>Model Converters<a class="headerlink" href="#model-converters" title="Link to this heading">¶</a></h1>
 <p>These tasks manipulate any input Potts task into a new format.
 Currently there are two Modifier Tasks, one that can convert any Potts model into an (effective) Ising model,
 and one that can minor-embed an Ising model task into a given graph, to meet requirements of any particular hardware accelerator.</p>
 <section id="binarized">
-<h2>Binarized<a class="headerlink" href="#binarized" title="Permalink to this headline">¶</a></h2>
+<h2>Binarized<a class="headerlink" href="#binarized" title="Link to this heading">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="PottsPlayground.Tasks.Binarized">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">PottsPlayground.Tasks.</span></span><span class="sig-name descname"><span class="pre">Binarized</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">PottsTask</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ConstraintFactor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PottsPlayground.Tasks.Binarized" title="Permalink to this definition">¶</a></dt>
-<dd><p>Maps any Potts model to an Ising model by splitting every q-dimensional Spin into q 2-dimensional spins and adding soft one-hot constraints 
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">PottsPlayground.Tasks.</span></span><span class="sig-name descname"><span class="pre">Binarized</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">PottsTask</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ConstraintFactor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PottsPlayground.Tasks.Binarized" title="Link to this definition">¶</a></dt>
+<dd><p>Maps any Potts model to an Ising model by splitting every q-dimensional Spin
+into q 2-dimensional spins and adding soft one-hot constraints 
 to each group of Ising spins.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="PottsPlayground.Tasks.Binarized.IsingToPottsSemantics">
-<span class="sig-name descname"><span class="pre">IsingToPottsSemantics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">IsingState</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PottsPlayground.Tasks.Binarized.IsingToPottsSemantics" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">IsingToPottsSemantics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">IsingState</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PottsPlayground.Tasks.Binarized.IsingToPottsSemantics" title="Link to this definition">¶</a></dt>
 <dd><p>if the Ising state is valid, this will return the Potts state for the associated Potts Model.
 Invalid states will also be processed into a valid Potts state, but the transformation is undefined.
 The returned Potts state can then be sent to the parent Potts Task for interpretation or visualization as a graph coloring solution, etc.</p>
@@ -78,7 +77,7 @@ The returned Potts state can then be sent to the parent Potts Task for interpret
 
 <dl class="py method">
 <dt class="sig sig-object py" id="PottsPlayground.Tasks.Binarized.PottsToIsingSemantics">
-<span class="sig-name descname"><span class="pre">PottsToIsingSemantics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">PottsState</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PottsPlayground.Tasks.Binarized.PottsToIsingSemantics" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">PottsToIsingSemantics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">PottsState</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PottsPlayground.Tasks.Binarized.PottsToIsingSemantics" title="Link to this definition">¶</a></dt>
 <dd><p>Converts a Potts state from the source task into an eqivalent Ising state.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -93,19 +92,34 @@ The returned Potts state can then be sent to the parent Potts Task for interpret
 </dl>
 </dd></dl>
 
+<dl class="py method">
+<dt class="sig sig-object py" id="PottsPlayground.Tasks.Binarized.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">PottsTask</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ConstraintFactor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PottsPlayground.Tasks.Binarized.__init__" title="Link to this definition">¶</a></dt>
+<dd><p>Turns a Potts model into an Ising model.  The resulting task is still a PottsTask, but all spins are binary.  The task can still
+be annealed as a Potts model, but can additionally be annealed using dedicated Ising-model code that runs a little faster.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>PottsTask</strong> – Any object correctly derived from the BaseTask class. Could even be another BinarizedTask, although that would not be productive.</p></li>
+<li><p><strong>ConstraintFactor</strong> (<em>float</em>) – Weight penalty for two Ising bits both being “hot” if they represent different values of the same Potts spin.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
 </dd></dl>
 
 </section>
 <section id="minorembedded">
-<h2>MinorEmbedded<a class="headerlink" href="#minorembedded" title="Permalink to this headline">¶</a></h2>
+<h2>MinorEmbedded<a class="headerlink" href="#minorembedded" title="Link to this heading">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="PottsPlayground.Tasks.MinorEmbedded">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">PottsPlayground.Tasks.</span></span><span class="sig-name descname"><span class="pre">MinorEmbedded</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">task</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ConstraintFactor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PottsPlayground.Tasks.MinorEmbedded" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">PottsPlayground.Tasks.</span></span><span class="sig-name descname"><span class="pre">MinorEmbedded</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">task</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ConstraintFactor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PottsPlayground.Tasks.MinorEmbedded" title="Link to this definition">¶</a></dt>
 <dd><p>Uses utilities from d-wave ocean libraries to minor embed and map from a q=2 potts model with arbitrary connectivity
 to a fixed-hardware topology ising model.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="PottsPlayground.Tasks.MinorEmbedded.FuzzyMinorToState">
-<span class="sig-name descname"><span class="pre">FuzzyMinorToState</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">minor_state</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PottsPlayground.Tasks.MinorEmbedded.FuzzyMinorToState" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">FuzzyMinorToState</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">minor_state</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PottsPlayground.Tasks.MinorEmbedded.FuzzyMinorToState" title="Link to this definition">¶</a></dt>
 <dd><p>Uses majority-vote to collapse the minor-embedded representation back into the source ising model.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -119,7 +133,7 @@ to a fixed-hardware topology ising model.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="PottsPlayground.Tasks.MinorEmbedded.StateToMinor">
-<span class="sig-name descname"><span class="pre">StateToMinor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PottsPlayground.Tasks.MinorEmbedded.StateToMinor" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">StateToMinor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PottsPlayground.Tasks.MinorEmbedded.StateToMinor" title="Link to this definition">¶</a></dt>
 <dd><p>Converts a state in the native Ising format to a state in the embedded format.
 This is useful for creating an initial condition for the embedded model that corresponds to 
 an equal initial condition in the original model.</p>
@@ -129,6 +143,22 @@ an equal initial condition in the original model.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>A vector of spin values, corresponding to spins in the target/physical Ising model.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PottsPlayground.Tasks.MinorEmbedded.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">task</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ConstraintFactor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PottsPlayground.Tasks.MinorEmbedded.__init__" title="Link to this definition">¶</a></dt>
+<dd><p>Creates the minor-embedded task.  May take a long time, and success is not guarenteed, since minor-embedding
+is itself an NP hard problem.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>task</strong> – An Ising-compatible Potts task (i.e. a Potts task with q=2 for all Spins)</p></li>
+<li><p><strong>target_graph</strong> – A NetworkX graph of the allowed Ising model connectivity.</p></li>
+<li><p><strong>ConstraintFactor</strong> (<em>float</em>) – Energy penalty for disagreements within each physical chain representing a single logical spin.</p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
@@ -148,14 +178,30 @@ an equal initial condition in the original model.</p>
 <h3><a href="index.html">Table of Contents</a></h3>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="gettingstarted.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="basetask.html">Base Task</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tasks.html">Specific Tasks</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Task Modifiers</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#binarized">Binarized</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#minorembedded">MinorEmbedded</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basetask.html">Potts Model Constructor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tasks.html">Built-in Tasks</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Model Converters</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#binarized">Binarized</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#PottsPlayground.Tasks.Binarized"><code class="docutils literal notranslate"><span class="pre">Binarized</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#PottsPlayground.Tasks.Binarized.IsingToPottsSemantics"><code class="docutils literal notranslate"><span class="pre">Binarized.IsingToPottsSemantics()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#PottsPlayground.Tasks.Binarized.PottsToIsingSemantics"><code class="docutils literal notranslate"><span class="pre">Binarized.PottsToIsingSemantics()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#PottsPlayground.Tasks.Binarized.__init__"><code class="docutils literal notranslate"><span class="pre">Binarized.__init__()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="annealing.html">Annealing</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#minorembedded">MinorEmbedded</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#PottsPlayground.Tasks.MinorEmbedded"><code class="docutils literal notranslate"><span class="pre">MinorEmbedded</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#PottsPlayground.Tasks.MinorEmbedded.FuzzyMinorToState"><code class="docutils literal notranslate"><span class="pre">MinorEmbedded.FuzzyMinorToState()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#PottsPlayground.Tasks.MinorEmbedded.StateToMinor"><code class="docutils literal notranslate"><span class="pre">MinorEmbedded.StateToMinor()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#PottsPlayground.Tasks.MinorEmbedded.__init__"><code class="docutils literal notranslate"><span class="pre">MinorEmbedded.__init__()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="annealing.html">Running a Model</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Schedules.html">Annealing Schedules</a></li>
 <li class="toctree-l1"><a class="reference internal" href="kernels.html">Weight Kernels</a></li>
 </ul>
@@ -174,18 +220,18 @@ an equal initial condition in the original model.</p>
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="annealing.html" title="Annealing"
+          <a href="annealing.html" title="Running a Model"
              >next</a> |</li>
         <li class="right" >
-          <a href="tasks.html" title="Specific Tasks"
+          <a href="tasks.html" title="Built-in Tasks"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">PottsPlayground  documentation</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Task Modifiers</a></li> 
+        <li class="nav-item nav-item-this"><a href="">Model Converters</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2024, William Whitehead.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    &#169; Copyright 2024, William Whitehead.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
     </div>
   </body>
 </html>

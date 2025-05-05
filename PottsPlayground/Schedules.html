@@ -1,24 +1,22 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en" data-content_root="./">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Annealing Schedules &#8212; PottsPlayground  documentation</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/classic.css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/classic.css?v=0dc0530d" />
     
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/doctools.js"></script>
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Weight Kernels" href="kernels.html" />
-    <link rel="prev" title="Annealing" href="annealing.html" /> 
+    <link rel="prev" title="Running a Model" href="annealing.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -33,7 +31,7 @@
           <a href="kernels.html" title="Weight Kernels"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="annealing.html" title="Annealing"
+          <a href="annealing.html" title="Running a Model"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">PottsPlayground  documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Annealing Schedules</a></li> 
@@ -46,7 +44,7 @@
           <div class="body" role="main">
             
   <section id="module-PottsPlayground.Schedules">
-<span id="annealing-schedules"></span><h1>Annealing Schedules<a class="headerlink" href="#module-PottsPlayground.Schedules" title="Permalink to this headline">¶</a></h1>
+<span id="annealing-schedules"></span><h1>Annealing Schedules<a class="headerlink" href="#module-PottsPlayground.Schedules" title="Link to this heading">¶</a></h1>
 <p>A collection of definitions for annealing schedules.  Each function returns a 2-D numpy array
 that can be interpreted as a piecewise linear function inside of PottsPlayground.Anneal.</p>
 <p>The piecewise linear function defines multiple aspects of an annealing run: the number of iterations/spin updates,
@@ -56,7 +54,7 @@ Note that progress can also be recorded more frequently, on a set periodic frequ
 nReports option of the PottsPlayground.Anneal function.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="PottsPlayground.Schedules.LinearTemp">
-<span class="sig-prename descclassname"><span class="pre">PottsPlayground.Schedules.</span></span><span class="sig-name descname"><span class="pre">LinearTemp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">niters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temp2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0001</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PottsPlayground.Schedules.LinearTemp" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">PottsPlayground.Schedules.</span></span><span class="sig-name descname"><span class="pre">LinearTemp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">niters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temp2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0001</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PottsPlayground.Schedules.LinearTemp" title="Link to this definition">¶</a></dt>
 <dd><p>Anneal a model at a linearly changing temperature, starting at temp and ending at temp2.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -71,7 +69,7 @@ nReports option of the PottsPlayground.Anneal function.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="PottsPlayground.Schedules.SawtoothTempLog2Space">
-<span class="sig-prename descclassname"><span class="pre">PottsPlayground.Schedules.</span></span><span class="sig-name descname"><span class="pre">SawtoothTempLog2Space</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">niters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">MinTemp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nTeeth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">FirstTooth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PottsPlayground.Schedules.SawtoothTempLog2Space" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">PottsPlayground.Schedules.</span></span><span class="sig-name descname"><span class="pre">SawtoothTempLog2Space</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">niters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">MinTemp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nTeeth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">FirstTooth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PottsPlayground.Schedules.SawtoothTempLog2Space" title="Link to this definition">¶</a></dt>
 <dd><p>Anneal a model according to a sawtooth temperature waveform.
 The duration of each sawtooth increases exponentially.
 Unless nReports is defined in the annealing run, a sample will be recorded at the end of each
@@ -93,7 +91,7 @@ especially for models that only mix at high temperatures but only settle into va
 
 <dl class="py function">
 <dt class="sig sig-object py" id="PottsPlayground.Schedules.constTemp">
-<span class="sig-prename descclassname"><span class="pre">PottsPlayground.Schedules.</span></span><span class="sig-name descname"><span class="pre">constTemp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">niters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temp</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PottsPlayground.Schedules.constTemp" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">PottsPlayground.Schedules.</span></span><span class="sig-name descname"><span class="pre">constTemp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">niters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temp</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PottsPlayground.Schedules.constTemp" title="Link to this definition">¶</a></dt>
 <dd><p>Anneal a model at a constant temperature for the given number of iterations.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -107,7 +105,7 @@ especially for models that only mix at high temperatures but only settle into va
 
 <dl class="py function">
 <dt class="sig sig-object py" id="PottsPlayground.Schedules.constTempLog2Space">
-<span class="sig-prename descclassname"><span class="pre">PottsPlayground.Schedules.</span></span><span class="sig-name descname"><span class="pre">constTempLog2Space</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">niters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nReports</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PottsPlayground.Schedules.constTempLog2Space" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">PottsPlayground.Schedules.</span></span><span class="sig-name descname"><span class="pre">constTempLog2Space</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">niters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nReports</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PottsPlayground.Schedules.constTempLog2Space" title="Link to this definition">¶</a></dt>
 <dd><p>Anneal a model at a constant temperature for the given number of iterations.
 Defines nReports breakpoints spaced logarithmically, 
 so that both fast and slow dynamics of model evolution can be recorded.</p>
@@ -134,11 +132,17 @@ so that both fast and slow dynamics of model evolution can be recorded.</p>
 <h3><a href="index.html">Table of Contents</a></h3>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="gettingstarted.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="basetask.html">Base Task</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tasks.html">Specific Tasks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="taskmodifiers.html">Task Modifiers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="annealing.html">Annealing</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Annealing Schedules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basetask.html">Potts Model Constructor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tasks.html">Built-in Tasks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="taskmodifiers.html">Model Converters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="annealing.html">Running a Model</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Annealing Schedules</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#PottsPlayground.Schedules.LinearTemp"><code class="docutils literal notranslate"><span class="pre">LinearTemp()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#PottsPlayground.Schedules.SawtoothTempLog2Space"><code class="docutils literal notranslate"><span class="pre">SawtoothTempLog2Space()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#PottsPlayground.Schedules.constTemp"><code class="docutils literal notranslate"><span class="pre">constTemp()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#PottsPlayground.Schedules.constTempLog2Space"><code class="docutils literal notranslate"><span class="pre">constTempLog2Space()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="kernels.html">Weight Kernels</a></li>
 </ul>
 
@@ -159,15 +163,15 @@ so that both fast and slow dynamics of model evolution can be recorded.</p>
           <a href="kernels.html" title="Weight Kernels"
              >next</a> |</li>
         <li class="right" >
-          <a href="annealing.html" title="Annealing"
+          <a href="annealing.html" title="Running a Model"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">PottsPlayground  documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Annealing Schedules</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2024, William Whitehead.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    &#169; Copyright 2024, William Whitehead.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
     </div>
   </body>
 </html>

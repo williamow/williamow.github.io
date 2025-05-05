@@ -1,19 +1,17 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en" data-content_root="./">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Welcome to PottsPlayground’s documentation! &#8212; PottsPlayground  documentation</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/classic.css" />
+    <title>Fast Potts Models in Python &#8212; PottsPlayground  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/classic.css?v=0dc0530d" />
     
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/doctools.js"></script>
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -32,7 +30,7 @@
           <a href="gettingstarted.html" title="Getting Started"
              accesskey="N">next</a> |</li>
         <li class="nav-item nav-item-0"><a href="#">PottsPlayground  documentation</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Welcome to PottsPlayground’s documentation!</a></li> 
+        <li class="nav-item nav-item-this"><a href="">Fast Potts Models in Python</a></li> 
       </ul>
     </div>  
 
@@ -41,11 +39,10 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <section id="welcome-to-pottsplayground-s-documentation">
-<h1>Welcome to PottsPlayground’s documentation!<a class="headerlink" href="#welcome-to-pottsplayground-s-documentation" title="Permalink to this headline">¶</a></h1>
-<p>PottsPlayground is a Python package for constructing and simulating combinatorial optimization problems represented as Potts Models.  It includes a system for constructing weight matrices in Python and a C++/CUDA extension for minimizing the Potts model energy on a CPU or GPU using various flavors of simulated annealing.</p>
+  <section id="fast-potts-models-in-python">
+<h1>Fast Potts Models in Python<a class="headerlink" href="#fast-potts-models-in-python" title="Link to this heading">¶</a></h1>
+<p>PottsPlayground is a Python package for constructing and simulating combinatorial optimization problems represented as Potts Models.  It’s purpose is twofold: providing an easily readable interface for constructing Potts models, and providing a fast C++/CUDA backend for annealing or sampling from models.</p>
 <p>Several example combinatorial problems are built-in, ranging from simple graph coloring to logic element placement for Ice40 FPGAs.  There are also methods for converting any Potts model into an Ising model, and for creating minor-embedded representations of Ising models.</p>
-<p>It is intended as a demonstration of what the Potts model is and is not capable of, and as a tool for further research with the Potts model of computation.</p>
 <div class="toctree-wrapper compound" id="potts-playground">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="gettingstarted.html">Getting Started</a><ul>
@@ -54,38 +51,113 @@
 <li class="toctree-l2"><a class="reference internal" href="gettingstarted.html#creating-a-new-task">Creating a New Task</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="basetask.html">Base Task</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tasks.html">Specific Tasks</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="tasks.html#graph-coloring">Graph Coloring</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tasks.html#traveling-salesman">Traveling Salesman</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basetask.html">Potts Model Constructor</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="basetask.html#PottsPlayground.PottsModel"><code class="docutils literal notranslate"><span class="pre">PottsModel</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="basetask.html#PottsPlayground.PottsModel.AddBias"><code class="docutils literal notranslate"><span class="pre">PottsModel.AddBias()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="basetask.html#PottsPlayground.PottsModel.AddKernel"><code class="docutils literal notranslate"><span class="pre">PottsModel.AddKernel()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="basetask.html#PottsPlayground.PottsModel.AddSpins"><code class="docutils literal notranslate"><span class="pre">PottsModel.AddSpins()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="basetask.html#PottsPlayground.PottsModel.AddWeight"><code class="docutils literal notranslate"><span class="pre">PottsModel.AddWeight()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="basetask.html#PottsPlayground.PottsModel.Compile"><code class="docutils literal notranslate"><span class="pre">PottsModel.Compile()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="basetask.html#PottsPlayground.PottsModel.EnergyBands"><code class="docutils literal notranslate"><span class="pre">PottsModel.EnergyBands()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="basetask.html#PottsPlayground.PottsModel.EvalCost"><code class="docutils literal notranslate"><span class="pre">PottsModel.EvalCost()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="basetask.html#PottsPlayground.PottsModel.EvalDDE"><code class="docutils literal notranslate"><span class="pre">PottsModel.EvalDDE()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="basetask.html#PottsPlayground.PottsModel.EvalDE"><code class="docutils literal notranslate"><span class="pre">PottsModel.EvalDE()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="basetask.html#PottsPlayground.PottsModel.EvalPE"><code class="docutils literal notranslate"><span class="pre">PottsModel.EvalPE()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="basetask.html#PottsPlayground.PottsModel.GetSpinBias"><code class="docutils literal notranslate"><span class="pre">PottsModel.GetSpinBias()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="basetask.html#PottsPlayground.PottsModel.GetSpinFromState"><code class="docutils literal notranslate"><span class="pre">PottsModel.GetSpinFromState()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="basetask.html#PottsPlayground.PottsModel.IndexOf"><code class="docutils literal notranslate"><span class="pre">PottsModel.IndexOf()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="basetask.html#PottsPlayground.PottsModel.InitKernelManager"><code class="docutils literal notranslate"><span class="pre">PottsModel.InitKernelManager()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="basetask.html#PottsPlayground.PottsModel.ListSpins"><code class="docutils literal notranslate"><span class="pre">PottsModel.ListSpins()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="basetask.html#PottsPlayground.PottsModel.PinSpin"><code class="docutils literal notranslate"><span class="pre">PottsModel.PinSpin()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="basetask.html#PottsPlayground.PottsModel.SetBias"><code class="docutils literal notranslate"><span class="pre">PottsModel.SetBias()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="basetask.html#PottsPlayground.PottsModel.SetSpinInState"><code class="docutils literal notranslate"><span class="pre">PottsModel.SetSpinInState()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="basetask.html#PottsPlayground.PottsModel.SpinSize"><code class="docutils literal notranslate"><span class="pre">PottsModel.SpinSize()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="basetask.html#PottsPlayground.PottsModel.TotalWeight"><code class="docutils literal notranslate"><span class="pre">PottsModel.TotalWeight()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="basetask.html#PottsPlayground.PottsModel.__init__"><code class="docutils literal notranslate"><span class="pre">PottsModel.__init__()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="taskmodifiers.html">Task Modifiers</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="taskmodifiers.html#binarized">Binarized</a></li>
-<li class="toctree-l2"><a class="reference internal" href="taskmodifiers.html#minorembedded">MinorEmbedded</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="annealing.html">Annealing</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="annealing.html#annealing-api">Annealing API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tasks.html">Built-in Tasks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tasks.html#graph-coloring">Graph Coloring</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tasks.html#PottsPlayground.Tasks.GraphColoring"><code class="docutils literal notranslate"><span class="pre">GraphColoring</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tasks.html#PottsPlayground.Tasks.GraphColoring.DisplayState"><code class="docutils literal notranslate"><span class="pre">GraphColoring.DisplayState()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tasks.html#PottsPlayground.Tasks.GraphColoring.__init__"><code class="docutils literal notranslate"><span class="pre">GraphColoring.__init__()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tasks.html#traveling-salesman">Traveling Salesman</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tasks.html#PottsPlayground.Tasks.TravelingSalesman"><code class="docutils literal notranslate"><span class="pre">TravelingSalesman</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tasks.html#PottsPlayground.Tasks.TravelingSalesman.DisplayState"><code class="docutils literal notranslate"><span class="pre">TravelingSalesman.DisplayState()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tasks.html#PottsPlayground.Tasks.TravelingSalesman.__init__"><code class="docutils literal notranslate"><span class="pre">TravelingSalesman.__init__()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="taskmodifiers.html">Model Converters</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="taskmodifiers.html#binarized">Binarized</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="taskmodifiers.html#PottsPlayground.Tasks.Binarized"><code class="docutils literal notranslate"><span class="pre">Binarized</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="taskmodifiers.html#PottsPlayground.Tasks.Binarized.IsingToPottsSemantics"><code class="docutils literal notranslate"><span class="pre">Binarized.IsingToPottsSemantics()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="taskmodifiers.html#PottsPlayground.Tasks.Binarized.PottsToIsingSemantics"><code class="docutils literal notranslate"><span class="pre">Binarized.PottsToIsingSemantics()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="taskmodifiers.html#PottsPlayground.Tasks.Binarized.__init__"><code class="docutils literal notranslate"><span class="pre">Binarized.__init__()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="taskmodifiers.html#minorembedded">MinorEmbedded</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="taskmodifiers.html#PottsPlayground.Tasks.MinorEmbedded"><code class="docutils literal notranslate"><span class="pre">MinorEmbedded</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="taskmodifiers.html#PottsPlayground.Tasks.MinorEmbedded.FuzzyMinorToState"><code class="docutils literal notranslate"><span class="pre">MinorEmbedded.FuzzyMinorToState()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="taskmodifiers.html#PottsPlayground.Tasks.MinorEmbedded.StateToMinor"><code class="docutils literal notranslate"><span class="pre">MinorEmbedded.StateToMinor()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="taskmodifiers.html#PottsPlayground.Tasks.MinorEmbedded.__init__"><code class="docutils literal notranslate"><span class="pre">MinorEmbedded.__init__()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="annealing.html">Running a Model</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="annealing.html#annealing-api">Annealing API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="annealing.html#PottsPlayground.Anneal"><code class="docutils literal notranslate"><span class="pre">PottsPlayground.Anneal()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="annealing.html#models">Models</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="annealing.html#pottsjit">PottsJit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annealing.html#potts">Potts</a></li>
 <li class="toctree-l3"><a class="reference internal" href="annealing.html#pottsprecompute">PottsPrecompute</a></li>
 <li class="toctree-l3"><a class="reference internal" href="annealing.html#ising">Ising</a></li>
 <li class="toctree-l3"><a class="reference internal" href="annealing.html#tsp">TSP</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="annealing.html#parallelism">Parallelism</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="annealing.html#parallel-hypotheses-noptions">Parallel Hypotheses (<strong>nOptions</strong>)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="annealing.html#parallel-updates-nactions">Parallel Updates (<strong>nActions</strong>)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="annealing.html#replicates-nreplicates">Replicates (<strong>nReplicates</strong>)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="annealing.html#multithreading-nworkers">Multithreading (<strong>nWorkers</strong>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annealing.html#algorithmic">Algorithmic</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="annealing.html#algorithms">Algorithms</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="annealing.html#simple-cpu-only">“Simple” (CPU only)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annealing.html#optionsactions">“OptionsActions”</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annealing.html#birdseye-cpu-only">“BirdsEye” (CPU only)</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="annealing.html#reports">Reports</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="Schedules.html">Annealing Schedules</a></li>
-<li class="toctree-l1"><a class="reference internal" href="kernels.html">Weight Kernels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Schedules.html">Annealing Schedules</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Schedules.html#PottsPlayground.Schedules.LinearTemp"><code class="docutils literal notranslate"><span class="pre">LinearTemp()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="Schedules.html#PottsPlayground.Schedules.SawtoothTempLog2Space"><code class="docutils literal notranslate"><span class="pre">SawtoothTempLog2Space()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="Schedules.html#PottsPlayground.Schedules.constTemp"><code class="docutils literal notranslate"><span class="pre">constTemp()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="Schedules.html#PottsPlayground.Schedules.constTempLog2Space"><code class="docutils literal notranslate"><span class="pre">constTempLog2Space()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="kernels.html">Weight Kernels</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="kernels.html#PottsPlayground.Kernels.BinaryQuadratic"><code class="docutils literal notranslate"><span class="pre">BinaryQuadratic()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="kernels.html#PottsPlayground.Kernels.Identity"><code class="docutils literal notranslate"><span class="pre">Identity()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="kernels.html#PottsPlayground.Kernels.IsingSpin"><code class="docutils literal notranslate"><span class="pre">IsingSpin()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </div>
 </section>
@@ -100,10 +172,10 @@
 <h3><a href="#">Table of Contents</a></h3>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="gettingstarted.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="basetask.html">Base Task</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tasks.html">Specific Tasks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="taskmodifiers.html">Task Modifiers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="annealing.html">Annealing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basetask.html">Potts Model Constructor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tasks.html">Built-in Tasks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="taskmodifiers.html">Model Converters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="annealing.html">Running a Model</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Schedules.html">Annealing Schedules</a></li>
 <li class="toctree-l1"><a class="reference internal" href="kernels.html">Weight Kernels</a></li>
 </ul>
@@ -125,12 +197,12 @@
           <a href="gettingstarted.html" title="Getting Started"
              >next</a> |</li>
         <li class="nav-item nav-item-0"><a href="#">PottsPlayground  documentation</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Welcome to PottsPlayground’s documentation!</a></li> 
+        <li class="nav-item nav-item-this"><a href="">Fast Potts Models in Python</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2024, William Whitehead.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    &#169; Copyright 2024, William Whitehead.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
     </div>
   </body>
 </html>

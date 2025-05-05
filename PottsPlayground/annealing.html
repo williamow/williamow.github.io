@@ -1,24 +1,22 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en" data-content_root="./">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Annealing &#8212; PottsPlayground  documentation</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/classic.css" />
+    <title>Running a Model &#8212; PottsPlayground  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/classic.css?v=0dc0530d" />
     
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/doctools.js"></script>
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Annealing Schedules" href="Schedules.html" />
-    <link rel="prev" title="Task Modifiers" href="taskmodifiers.html" /> 
+    <link rel="prev" title="Model Converters" href="taskmodifiers.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -33,10 +31,10 @@
           <a href="Schedules.html" title="Annealing Schedules"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="taskmodifiers.html" title="Task Modifiers"
+          <a href="taskmodifiers.html" title="Model Converters"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">PottsPlayground  documentation</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Annealing</a></li> 
+        <li class="nav-item nav-item-this"><a href="">Running a Model</a></li> 
       </ul>
     </div>  
 
@@ -45,84 +43,113 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <section id="annealing">
-<h1>Annealing<a class="headerlink" href="#annealing" title="Permalink to this headline">¶</a></h1>
+  <section id="running-a-model">
+<h1>Running a Model<a class="headerlink" href="#running-a-model" title="Link to this heading">¶</a></h1>
 <section id="annealing-api">
-<h2>Annealing API<a class="headerlink" href="#annealing-api" title="Permalink to this headline">¶</a></h2>
+<h2>Annealing API<a class="headerlink" href="#annealing-api" title="Link to this heading">¶</a></h2>
 <p>There is a single C++/CUDA extension that performs annealing.  However there are a large number of options, which are described in greater detail below.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="PottsPlayground.Anneal">
-<span class="sig-prename descclassname"><span class="pre">PottsPlayground.</span></span><span class="sig-name descname"><span class="pre">Anneal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">task</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">PwlTemp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">IC=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nOptions=1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nActions=1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model=&quot;PottsJit&quot;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device=&quot;CPU&quot;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">IncludedReports&quot;ABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nReplicates=1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nWorkers=1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nReports=-1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PottsPlayground.Anneal" title="Permalink to this definition">¶</a></dt>
-<dd><p>Anneals a Potts model and returns a dictionary of results.</p>
+<span class="sig-prename descclassname"><span class="pre">PottsPlayground.</span></span><span class="sig-name descname"><span class="pre">Anneal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">task</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">PwlTemp</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PottsPlayground.Anneal" title="Link to this definition">¶</a></dt>
+<dd><p>Anneals/samples/computes a Potts model and returns a dictionary of results.</p>
+<p>Required parameters:</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>task</strong> – A PottsPlayground task object containing a complete Potts Model description.</p></li>
 <li><p><strong>PwlTemp</strong> (<em>2-D numpy float.  See Schedules page for format.</em>) – An array describing the annealing schedule, i.e. the annealing temperature as a piece-wise linear function of iterations.</p></li>
-<li><p><strong>IC</strong> – optional Initial Condition for the annealing run.  Either a 1-D Numpy int array containing a single IC for all replicates, or a 2-D Numpy array of ints (#Replicates X #Spins) indicating a distinct initial condition for each replicate.</p></li>
-<li><p><strong>nOptions</strong> (<em>int</em>) – The number of parallel action hypotheses to consider in each update cycle.</p></li>
-<li><p><strong>nActions</strong> (<em>int</em>) – The number of parallel actions to actually take in each update cycle.</p></li>
-<li><p><strong>model</strong> (<em>str</em>) – What model to anneal.  See “Models” section.</p></li>
+</ul>
+</dd>
+</dl>
+<p>Parameters for selecting the computational method:</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model</strong> (<em>str</em>) – What model to anneal.  See “Models” section. Default: “Potts”</p></li>
 <li><p><strong>device</strong> (<em>str</em>) – Which physical device to run the annealing on.  Either “CPU” or “GPU”.  Defaults to CPU if the project was not compiled with GPU support, or if no suitable GPU was found on import.</p></li>
-<li><p><strong>IncludedReports</strong> – Str containing letter flags for which types of information are returned by the function. See “Reports” section.</p></li>
+<li><p><strong>algo</strong> (<em>str</em>) – Selects between sampling algorithm variants.  Available selections depends on the annealing device.</p></li>
+</ul>
+</dd>
+</dl>
+<p>Additional run-time controls:</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
 <li><p><strong>nReplicates</strong> (<em>int</em>) – Number of Potts Model instances to compute in parallel.</p></li>
-<li><p><strong>nWorkers</strong> (<em>int</em>) – On a CPU, the number of CPU threads to use; on a GPU, the number of GPU threads that work together collectively on a single replicate.</p></li>
+<li><p><strong>nWorkers</strong> (<em>int</em>) – On a CPU, the number of CPU threads to use; on a GPU, the number of GPU threads that work together collectively on a single replicate. On a GPU, depending on the algorithm, this can alter results.</p></li>
+<li><p><strong>IncludedReports</strong> – Str containing letter flags for which types of information are returned by the function. See “Reports” section.</p></li>
+<li><p><strong>IC</strong> – optional Initial Condition for the annealing run.  Either a 1-D Numpy int array containing a single IC for all replicates, or a 2-D Numpy array of ints (#Replicates X #Spins) indicating a distinct initial condition for each replicate.</p></li>
 <li><p><strong>nReports</strong> (<em>int</em>) – How many times over the course of the annealing run annealing should be stopped and vitals checked and reported. If -1, Reports are taken at the points defined in PwlTemp.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A collection of energies, states, and more that describe the outcome of the annealing.</p>
+</dl>
+<p>Algorithm-specific parameters (see algorithms section):</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A collection of energies, states, and more that describe the outcome of the annealing.</p>
 </dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>dict</p>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict</p>
 </dd>
 </dl>
 </dd></dl>
 
 </section>
 <section id="models">
-<h2>Models<a class="headerlink" href="#models" title="Permalink to this headline">¶</a></h2>
+<h2>Models<a class="headerlink" href="#models" title="Link to this heading">¶</a></h2>
 <p>Annealing can be done with one of several computational “models”, which is usually the Potts Model.  However Ising model and a natural Traveling Salesman Model are also included for comparison purposes.  Furthermore two Potts model variants are available; they function identically, but depending on other factors one or the other will execute faster.</p>
-<section id="pottsjit">
-<h3>PottsJit<a class="headerlink" href="#pottsjit" title="Permalink to this headline">¶</a></h3>
-<p>The Potts Just-in-time (JIT) backend computes the DE of changing a spin only when the spin change is actually proposed in the annealing algorithm. This is the normal mode of computation found across simuated annealing implimentations in the software world.</p>
+<section id="potts">
+<h3>Potts<a class="headerlink" href="#potts" title="Link to this heading">¶</a></h3>
+<p>The normal Potts backend computes the DE of changing a spin only when the spin change is actually proposed in the annealing algorithm. This is the normal mode of computation found across simuated annealing implimentations in the software world.</p>
 </section>
 <section id="pottsprecompute">
-<h3>PottsPrecompute<a class="headerlink" href="#pottsprecompute" title="Permalink to this headline">¶</a></h3>
+<h3>PottsPrecompute<a class="headerlink" href="#pottsprecompute" title="Link to this heading">¶</a></h3>
 <p>The Potts Precompute backend always knows the DE of every single possible spin change.  The DE values are kept current by an update algorithm that calculates DDE values after every spin change that occurs; this is more efficient when many possible DE values are queried between actual spin changes.</p>
 </section>
 <section id="ising">
-<h3>Ising<a class="headerlink" href="#ising" title="Permalink to this headline">¶</a></h3>
+<h3>Ising<a class="headerlink" href="#ising" title="Link to this heading">¶</a></h3>
 <p>When a Potts model has q=2 for all spins, and the weight kernels are specified in a binary-quadratic format, the Ising backend provides a more streamlined but functionally equivalent computation.</p>
 </section>
 <section id="tsp">
-<h3>TSP<a class="headerlink" href="#tsp" title="Permalink to this headline">¶</a></h3>
+<h3>TSP<a class="headerlink" href="#tsp" title="Link to this heading">¶</a></h3>
 <p>The TSP background is for use with the traveling salesman task only, and defines a completely different model of computation where the order of cities is strictly enforced and only city swaps are allowed.  This is the standard annealing format for the traveling salesman problem outside of the realm of physics-inspired computing.</p>
 </section>
 </section>
 <section id="parallelism">
-<h2>Parallelism<a class="headerlink" href="#parallelism" title="Permalink to this headline">¶</a></h2>
-<p>Several types of parallelism exist when a model is annealed.  Two are algorithmic and somewhat subtlely affect the the annealing result; the others are mechanical and concern the acceleration of an annealing run using multithreading.</p>
-<section id="parallel-hypotheses-noptions">
-<h3>Parallel Hypotheses (<strong>nOptions</strong>)<a class="headerlink" href="#parallel-hypotheses-noptions" title="Permalink to this headline">¶</a></h3>
-<p>In typical software annealing, a single state change is proposed, evaluated, and then either actualized or not.  However it is also possible to propose multiple possible state changes, evaluate the cost of each one, and then stochastically select the best.  This can actually increase flip efficiency, but at a computational cost.</p>
-</section>
-<section id="parallel-updates-nactions">
-<h3>Parallel Updates (<strong>nActions</strong>)<a class="headerlink" href="#parallel-updates-nactions" title="Permalink to this headline">¶</a></h3>
-<p>The more often discussed form of parallelism, multiple state changes can be made in parallel without considering their mutual effects, breaking Gibbs sampling.  State changes occur at a faster rate, but each change may be less efficient.</p>
-</section>
+<h2>Parallelism<a class="headerlink" href="#parallelism" title="Link to this heading">¶</a></h2>
+<p>Several types of parallelism exist when a model is annealed.  Two main types are mechanical and concern the acceleration of an annealing run using multithreading.  Additional types of parallelism depend on the sampling algorithm - see Algorithms section.</p>
 <section id="replicates-nreplicates">
-<h3>Replicates (<strong>nReplicates</strong>)<a class="headerlink" href="#replicates-nreplicates" title="Permalink to this headline">¶</a></h3>
+<h3>Replicates (<strong>nReplicates</strong>)<a class="headerlink" href="#replicates-nreplicates" title="Link to this heading">¶</a></h3>
 <p>Multiple copies of a Potts or other model can be executed in parallel.  This is particularly helpful for sampling, since the different copies will yield independent states suitable for taking averages, etc.  For many problem-solving annealing runs however, performance is often limited by the mixing/settling time of a single replicate, and a large population of replicates provides rapidly diminishing returns.</p>
 </section>
 <section id="multithreading-nworkers">
-<h3>Multithreading (<strong>nWorkers</strong>)<a class="headerlink" href="#multithreading-nworkers" title="Permalink to this headline">¶</a></h3>
+<h3>Multithreading (<strong>nWorkers</strong>)<a class="headerlink" href="#multithreading-nworkers" title="Link to this heading">¶</a></h3>
 <p>This parameter has different effects for GPU and CPU operation.  On a CPU, each model replicate is contained within a single thread, and nWorkers defines how many threads can run at once - usually, the number of cores in the system.</p>
 <p>For a GPU, threads can more easily work together to speed up computation on a single replicate.  In this case nWorkers specifies how many GPU threads should work cooperatively on each replicate; this value should be chosen based on the level of parallelism specified by nOptions and nActions.  If there is only one option and one action, multiple cooperating GPU threads won’t provide much of a speed-up; however if there are many, 32 workers is a good choice (the number of threads in an Nvidia GPU warp; something to read about elsewhere).  A GPU call will automatically use as many of the available GPU cores as possible, i.e. 1024 cores if there are 32 replicates each with 32 workers.</p>
 </section>
+<section id="algorithmic">
+<h3>Algorithmic<a class="headerlink" href="#algorithmic" title="Link to this heading">¶</a></h3>
+<p>The most common type of algorithmic parallelism is updating multiple Potts/Ising spins at once.  Restricted Boltzmann machines are in fact restricted precisiely so that whole sets of Ising spins can be updated at the same time, without violating Boltzmann statistics, in a way that is computationally fast.  However, other forms of parallelism also exist; see below for more details on how different algorithms provide parallelism in different ways.</p>
+</section>
+</section>
+<section id="algorithms">
+<h2>Algorithms<a class="headerlink" href="#algorithms" title="Link to this heading">¶</a></h2>
+<p>Several sampling algorithms are available, selected by the <strong>algo</strong> parameter.</p>
+<section id="simple-cpu-only">
+<h3>“Simple” (CPU only)<a class="headerlink" href="#simple-cpu-only" title="Link to this heading">¶</a></h3>
+<p>This is the tradtional simulated annealing algorithm, where state changes are proposed, the change in cost dE is evaluated, and then the change is accepted if dE is negative or is accepted with probability exp(-dE/T) otherwise.</p>
+</section>
+<section id="optionsactions">
+<h3>“OptionsActions”<a class="headerlink" href="#optionsactions" title="Link to this heading">¶</a></h3>
+<p>At each step in the “OptionsActions” algorithm, <strong>nOptions</strong> possilbe spin changes are considered at a time, and up to <strong>nActions</strong> spin updates actually happen.  When <strong>nOptions**=1 and **nActions**=1, it behaves the same as the Simple algorithm.  When **nOptions</strong> is large and <strong>nActions**=1, it behaves similarly to the BirdsEye algorithm, but is less efficient.  By enabling parallel spin updates with **nActions</strong>&gt;1 and varying <strong>nOptions</strong>, this algorithm can trade off computational efficiency and algorithmic efficiency.</p>
+</section>
+<section id="birdseye-cpu-only">
+<h3>“BirdsEye” (CPU only)<a class="headerlink" href="#birdseye-cpu-only" title="Link to this heading">¶</a></h3>
+<p>Bird’s Eye annealing attempts to replicate a type of parallelism that exists in hardware annealing accelerators.  At each computational step, all possible spin changes are considered simultaneously.  In order to do this efficiently in software, the BirdsEye algorithm maintains a binary tree of spin update probabilities to enable searching in logarithmic time, and sparse recomputation of probability changes after each spin flip.  For sparse recomputation to work, either the “PottsPrecompute” or “IsingPrecompute” models need to be used.</p>
+</section>
 </section>
 <section id="reports">
-<h2>Reports<a class="headerlink" href="#reports" title="Permalink to this headline">¶</a></h2>
+<h2>Reports<a class="headerlink" href="#reports" title="Link to this heading">¶</a></h2>
 <p>The Annealing function returns a dictionary of Reports.  Each report concerns a particular aspect or measure of the annealing run, formatted as a Numpy array.  The first dimension is always equal to the number or reports; some reports are only a scalar value at each sampling point, while others which may be a vector or matrix at each sampling point return Numpy matrices with two or three dimensions respectively.</p>
 <p>There are two ways the reporting schedule can be defined.  If <strong>nReports</strong> is given, the iterations of the annealing run will be split into <strong>nReports</strong> segments, and the performance/behavior of the annealing run will be recorded at the end of each segment.  If nReports is not defined, the reports are made at the end of each segment defined in the piece-wise linear annealing schedule definition.</p>
 <p>In this list, the letter corresponds to the flag that includes the report, and the name indentifier can be used to find the information in the returned dictionary.</p>
@@ -150,23 +177,31 @@
 <h3><a href="index.html">Table of Contents</a></h3>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="gettingstarted.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="basetask.html">Base Task</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tasks.html">Specific Tasks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="taskmodifiers.html">Task Modifiers</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Annealing</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#annealing-api">Annealing API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basetask.html">Potts Model Constructor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tasks.html">Built-in Tasks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="taskmodifiers.html">Model Converters</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Running a Model</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#annealing-api">Annealing API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#PottsPlayground.Anneal"><code class="docutils literal notranslate"><span class="pre">PottsPlayground.Anneal()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#models">Models</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#pottsjit">PottsJit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#potts">Potts</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pottsprecompute">PottsPrecompute</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#ising">Ising</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tsp">TSP</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#parallelism">Parallelism</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#parallel-hypotheses-noptions">Parallel Hypotheses (<strong>nOptions</strong>)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#parallel-updates-nactions">Parallel Updates (<strong>nActions</strong>)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#replicates-nreplicates">Replicates (<strong>nReplicates</strong>)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#multithreading-nworkers">Multithreading (<strong>nWorkers</strong>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#algorithmic">Algorithmic</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#algorithms">Algorithms</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#simple-cpu-only">“Simple” (CPU only)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#optionsactions">“OptionsActions”</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#birdseye-cpu-only">“BirdsEye” (CPU only)</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#reports">Reports</a></li>
@@ -193,15 +228,15 @@
           <a href="Schedules.html" title="Annealing Schedules"
              >next</a> |</li>
         <li class="right" >
-          <a href="taskmodifiers.html" title="Task Modifiers"
+          <a href="taskmodifiers.html" title="Model Converters"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">PottsPlayground  documentation</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Annealing</a></li> 
+        <li class="nav-item nav-item-this"><a href="">Running a Model</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2024, William Whitehead.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    &#169; Copyright 2024, William Whitehead.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
     </div>
   </body>
 </html>
